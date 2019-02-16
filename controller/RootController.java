@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,6 +30,9 @@ public class RootController implements Initializable {
     @FXML
     private TextField feelTemperature;
 
+   @FXML
+   private ImageView ikona;
+
 
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -47,6 +52,8 @@ public class RootController implements Initializable {
             Weather weather = objectMapper.readValue(jsonURL, Weather.class);
             feelTemperature.setText(String.valueOf(weather.getCurrent().getFeelslike_c()));
             temperature.setText(String.valueOf(weather.getCurrent().getTemp_c()));
+            ikona.setImage(new Image("http:" + weather.getCurrent().getCondition().getIcon()));
+
 
 
         } catch (IOException e) {
